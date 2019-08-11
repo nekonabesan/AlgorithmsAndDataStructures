@@ -1,9 +1,28 @@
+#define _TARGET_H_
+#define TRUE 1
+#define FALSE 0
+//==========================================//
+// ope
+// LOAD   = 0x4c
+// ADD(+) = 0x41
+// SUB(-) = 0x53
+// MUT(x) = 0x4d
+// DIV(/) = 0x44
+//==========================================//
+#define LOAD 0x4c
+#define ADD 0x41
+#define SUB 0x53
+#define MUT 0x4d
+#define DIV 0x44
+
 // テストケース記述ファイル
 #include "gtest/gtest.h" // googleTestを使用するおまじないはこれだけでOK
 // テスト対象関数を呼び出せるようにするのだが
 // extern "C"がないとCと解釈されない、意外とハマりがち。
 extern "C" {
-  #include "ad05_01_target.h"
+  #include "ad05_02_target.h"
+  void preorder(struct node *p);
+  void dest(struct node* p);
 }
 
 // fixtureNameはテストケース群をまとめるグループ名と考えればよい、任意の文字列
@@ -22,7 +41,9 @@ protected:
 struct node {
   struct node *left;
   struct node *right;
-  char label;
+  char ope;
+  double num;
+  double result;
 };
 
 // 成功するテストケース。細かい説明はGoogleTestのマニュアルを見てね。
@@ -36,25 +57,39 @@ TEST_F(fixtureName, sample)
 //============================================================================//
 // a.行きがけ順
 //============================================================================//
-TEST_F(fixtureName, preorder)
+TEST_F(fixtureName, preorder1)
 {
   //initialize では先のアルゴリズムによって roomprice を順に初期化しています
-  //int *roomprice = (int *)malloc(rmax * sizeof(int));
-  //int *roomsel = (int *)malloc(rmax * sizeof(int));
+  //==========================================//
+  // ope
+  // LOAD   = 0x4c
+  // ADD(+) = 0x41
+  // SUB(-) = 0x53
+  // MUT(x) = 0x4d
+  // DIV(/) = 0x44
+  //==========================================//
+  double result = 0;
   struct node* n1 = (struct node*)malloc(sizeof(struct node) * 1);
-  n1->label = 0x31;
+  n1->num = 0;
+  n1->ope = MUT;
   struct node* n2 = (struct node*)malloc(sizeof(struct node) * 1);
-  n2->label = 0x32;
+  n2->num = 0;
+  n2->ope = ADD;
   struct node* n3 = (struct node*)malloc(sizeof(struct node) * 1);
-  n3->label = 0x33;
+  n3->num = 3;
+  n3->ope = LOAD;
   struct node* n4 = (struct node*)malloc(sizeof(struct node) * 1);
-  n4->label = 0x34;
+  n4->num = 4;
+  n4->ope = LOAD;
   struct node* n5 = (struct node*)malloc(sizeof(struct node) * 1);
-  n5->label = 0x35;
+  n5->num = 0;
+  n5->ope = SUB;
   struct node* n6 = (struct node*)malloc(sizeof(struct node) * 1);
-  n6->label = 0x36;
+  n6->num = 6;
+  n6->ope = LOAD;
   struct node* n7 = (struct node*)malloc(sizeof(struct node) * 1);
-  n7->label = 0x37;
+  n7->num = 7;
+  n7->ope = LOAD;
   //
   n2->left = n3;
   n2->right = n4;
@@ -62,8 +97,31 @@ TEST_F(fixtureName, preorder)
   n5->right = n7;
   n1->left = n2;
   n1->right = n5;
+  // CASE01
   preorder(n1);
-  dest(n1);
+  EXPECT_EQ(n1->num, -7);
+  // CASE02
+  n6->num = 0;
+  n6->ope = ADD;
+  struct node* n8 = (struct node*)malloc(sizeof(struct node) * 1);
+  n8->num = 4;
+  n8->ope = LOAD;
+  struct node* n9 = (struct node*)malloc(sizeof(struct node) * 1);
+  n9->num = 5;
+  n9->ope = LOAD;
+  /*struct node* n10 = (struct node*)malloc(sizeof(struct node) * 1);
+  n10->num = 1;
+  n10->ope = LOAD;
+  struct node* n11 = (struct node*)malloc(sizeof(struct node) * 1);
+  n11->num = 1;
+  n11->ope = LOAD;*/
+  //
+  n6->left = n8;
+  n6->right = n9;
+  preorder(n1);
+  EXPECT_EQ(n1->num, 14);
+
+  //dest(n1);
 }
 
 //============================================================================//

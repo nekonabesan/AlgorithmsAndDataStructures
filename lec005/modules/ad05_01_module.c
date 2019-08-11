@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -40,18 +39,12 @@ void postorder(struct node *p){
   printf("%c\n", p->label);
 }
 
-void dest(struct node* p){
-  if(p == NULL){
-    return;
-  }
-  if(p->left->left == NULL && p->left->right == NULL){
-    free(p->left);
-  } else {
+void dest(struct node *p){
+    if(p == NULL){
+      return;
+    }
     dest(p->left);
-  }
-  if(p->left->left == NULL && p->left->right == NULL){
-    free(p->right);
-  } else {
     dest(p->right);
-  }
+    free(p);
+    p = NULL;
 }
