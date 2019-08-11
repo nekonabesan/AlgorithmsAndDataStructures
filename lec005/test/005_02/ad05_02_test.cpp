@@ -90,7 +90,7 @@ TEST_F(fixtureName, preorder1)
   struct node* n7 = (struct node*)malloc(sizeof(struct node) * 1);
   n7->num = 7;
   n7->ope = LOAD;
-  //
+  // 二分木構造を生成する処理
   n2->left = n3;
   n2->right = n4;
   n5->left = n6;
@@ -109,19 +109,13 @@ TEST_F(fixtureName, preorder1)
   struct node* n9 = (struct node*)malloc(sizeof(struct node) * 1);
   n9->num = 5;
   n9->ope = LOAD;
-  /*struct node* n10 = (struct node*)malloc(sizeof(struct node) * 1);
-  n10->num = 1;
-  n10->ope = LOAD;
-  struct node* n11 = (struct node*)malloc(sizeof(struct node) * 1);
-  n11->num = 1;
-  n11->ope = LOAD;*/
-  //
+  //　ポイントを付け替える処理
   n6->left = n8;
   n6->right = n9;
   preorder(n1);
   EXPECT_EQ(n1->num, 14);
-
-  //dest(n1);
+  // 領域を解放する処理
+  dest(n1);
 }
 
 //============================================================================//
