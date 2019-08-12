@@ -34,33 +34,99 @@ TEST_F(fixtureName, sample)
 }
 
 //============================================================================//
-// a.行きがけ順
+// a. babble sort
 //============================================================================//
-TEST_F(fixtureName, preorder)
+TEST_F(fixtureName, babble)
 {
-  //initialize では先のアルゴリズムによって roomprice を順に初期化しています
   //int *roomprice = (int *)malloc(rmax * sizeof(int));
   //int *roomsel = (int *)malloc(rmax * sizeof(int));
   /*struct node* n1 = (struct node*)malloc(sizeof(struct node) * 1);
   n1->label = 0x31;
   struct node* n2 = (struct node*)malloc(sizeof(struct node) * 1);
   n2->label = 0x32;*/
-
+  int *a = (int *)malloc(10 * sizeof(int));
+  a[0] = 20;
+  a[1] = 6;
+  a[2] = 55;
+  a[3] = 74;
+  a[4] = 3;
+  a[5] = 45;
+  a[6] = 13;
+  a[7] = 87;
+  a[8] = 46;
+  a[9] = 30;
+  babble(a, 10);
+  EXPECT_EQ(a[0], 3);
+  EXPECT_EQ(a[1], 6);
+  EXPECT_EQ(a[2], 13);
+  EXPECT_EQ(a[3], 20);
+  EXPECT_EQ(a[4], 30);
+  EXPECT_EQ(a[5], 45);
+  EXPECT_EQ(a[6], 46);
+  EXPECT_EQ(a[7], 55);
+  EXPECT_EQ(a[8], 74);
+  EXPECT_EQ(a[9], 87);
+  free(a);
 }
 
 //============================================================================//
-// b.通りがけ順
+// b. select_sort
 //============================================================================//
-TEST_F(fixtureName, inorder)
+TEST_F(fixtureName, select)
 {
   // 値を読み出す時には room1 という下請け関数を呼びます。
   // この関数は、人数 i が負のときは 0 を返し、それ以外はroomprice[i] を返します。
+  int *a = (int *)malloc(10 * sizeof(int));
+  a[0] = 20;
+  a[1] = 6;
+  a[2] = 55;
+  a[3] = 74;
+  a[4] = 3;
+  a[5] = 45;
+  a[6] = 13;
+  a[7] = 87;
+  a[8] = 46;
+  a[9] = 30;
+  select_sort(a, 10);
+  EXPECT_EQ(a[0], 3);
+  EXPECT_EQ(a[1], 6);
+  EXPECT_EQ(a[2], 13);
+  EXPECT_EQ(a[3], 20);
+  EXPECT_EQ(a[4], 30);
+  EXPECT_EQ(a[5], 45);
+  EXPECT_EQ(a[6], 46);
+  EXPECT_EQ(a[7], 55);
+  EXPECT_EQ(a[8], 74);
+  EXPECT_EQ(a[9], 87);
+  free(a);
 }
 
 //============================================================================//
 // c. 帰りがけ順
 //============================================================================//
-TEST_F(fixtureName, postorder)
+TEST_F(fixtureName, insert)
 {
-
+  int *a = (int *)malloc(10 * sizeof(int));
+  a[0] = 20;
+  a[1] = 6;
+  a[2] = 55;
+  a[3] = 74;
+  a[4] = 3;
+  a[5] = 45;
+  a[6] = 13;
+  a[7] = 87;
+  a[8] = 46;
+  a[9] = 30;
+  insort(a, 10);
+  EXPECT_EQ(a[0], 3);
+  EXPECT_EQ(a[1], 6);
+  EXPECT_EQ(a[2], 13);
+  EXPECT_EQ(a[3], 20);
+  EXPECT_EQ(a[4], 30);
+  EXPECT_EQ(a[5], 45);
+  EXPECT_EQ(a[6], 46);
+  EXPECT_EQ(a[7], 55);
+  EXPECT_EQ(a[8], 74);
+  EXPECT_EQ(a[9], 87);
+  free(a);
 }
