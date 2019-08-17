@@ -14,6 +14,9 @@
 
 // 以下のプロトタイプ宣言
 void shell(int *a, int n);
-void quick(int *a, int n);
+void quick_01(int *a, int n);
+// ad08_03
+int* separator(int n);
+void msort(int *a, int start, int end);
 
 #endif /* _TARGET_H_ */

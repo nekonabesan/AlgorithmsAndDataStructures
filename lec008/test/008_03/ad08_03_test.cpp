@@ -19,12 +19,6 @@ protected:
     }
 };
 
-struct node {
-  struct node *left;
-  struct node *right;
-  char label;
-};
-
 // 成功するテストケース。細かい説明はGoogleTestのマニュアルを見てね。
 TEST_F(fixtureName, sample)
 {
@@ -34,9 +28,42 @@ TEST_F(fixtureName, sample)
 }
 
 //============================================================================//
+// b. separator
+//============================================================================//
+TEST_F(fixtureName, separator1)
+{
+  int *b = separator(10);
+  EXPECT_EQ(10, b[4]);
+  EXPECT_EQ(5, b[3]);
+  EXPECT_EQ(3, b[2]);
+  EXPECT_EQ(2, b[1]);
+  EXPECT_EQ(1, b[0]);
+  free(b);
+}
+TEST_F(fixtureName, separator2)
+{
+  int *b = separator(8);
+  EXPECT_EQ(8, b[3]);
+  EXPECT_EQ(4, b[2]);
+  EXPECT_EQ(2, b[1]);
+  EXPECT_EQ(1, b[0]);
+  free(b);
+}
+TEST_F(fixtureName, separator3)
+{
+  int *b = separator(15);
+  EXPECT_EQ(15, b[4]);
+  EXPECT_EQ(8, b[3]);
+  EXPECT_EQ(4, b[2]);
+  EXPECT_EQ(2, b[1]);
+  EXPECT_EQ(1, b[0]);
+  free(b);
+}
+
+//============================================================================//
 // b. quick sort 01
 //============================================================================//
-TEST_F(fixtureName, quick)
+TEST_F(fixtureName, msort)
 {
   // 値を読み出す時には room1 という下請け関数を呼びます。
   // この関数は、人数 i が負のときは 0 を返し、それ以外はroomprice[i] を返します。
@@ -51,17 +78,28 @@ TEST_F(fixtureName, quick)
   a[7] = 87;
   a[8] = 46;
   a[9] = 30;
-  quick_01(a, 10);
+  msort(a, 0, 3);
+  EXPECT_EQ(a[0], 6);
+  EXPECT_EQ(a[1], 20);
+  EXPECT_EQ(a[2], 55);
+  EXPECT_EQ(a[3], 74);
+  EXPECT_EQ(a[4], 3);
+  EXPECT_EQ(a[5], 45);
+  EXPECT_EQ(a[6], 13);
+  EXPECT_EQ(a[7], 87);
+  EXPECT_EQ(a[8], 46);
+  EXPECT_EQ(a[9], 30);
+  msort(a, 3, 5);
   EXPECT_EQ(a[0], 3);
   EXPECT_EQ(a[1], 6);
-  EXPECT_EQ(a[2], 13);
-  EXPECT_EQ(a[3], 20);
-  EXPECT_EQ(a[4], 30);
+  EXPECT_EQ(a[2], 20);
+  EXPECT_EQ(a[3], 55);
+  EXPECT_EQ(a[4], 74);
   EXPECT_EQ(a[5], 45);
-  EXPECT_EQ(a[6], 46);
-  EXPECT_EQ(a[7], 55);
-  EXPECT_EQ(a[8], 74);
-  EXPECT_EQ(a[9], 87);
+  EXPECT_EQ(a[6], 13);
+  EXPECT_EQ(a[7], 87);
+  EXPECT_EQ(a[8], 46);
+  EXPECT_EQ(a[9], 30);
   free(a);
 }
 
