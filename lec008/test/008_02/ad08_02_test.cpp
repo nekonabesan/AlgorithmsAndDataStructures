@@ -34,16 +34,12 @@ TEST_F(fixtureName, sample)
 }
 
 //============================================================================//
-// a. shell sort
+// b. quick sort 01
 //============================================================================//
-TEST_F(fixtureName, shell)
+TEST_F(fixtureName, quick)
 {
-  //int *roomprice = (int *)malloc(rmax * sizeof(int));
-  //int *roomsel = (int *)malloc(rmax * sizeof(int));
-  /*struct node* n1 = (struct node*)malloc(sizeof(struct node) * 1);
-  n1->label = 0x31;
-  struct node* n2 = (struct node*)malloc(sizeof(struct node) * 1);
-  n2->label = 0x32;*/
+  // 値を読み出す時には room1 という下請け関数を呼びます。
+  // この関数は、人数 i が負のときは 0 を返し、それ以外はroomprice[i] を返します。
   int *a = (int *)malloc(10 * sizeof(int));
   a[0] = 20;
   a[1] = 6;
@@ -55,7 +51,7 @@ TEST_F(fixtureName, shell)
   a[7] = 87;
   a[8] = 46;
   a[9] = 30;
-  shell(a, 10);
+  quick(a, 10);
   EXPECT_EQ(a[0], 3);
   EXPECT_EQ(a[1], 6);
   EXPECT_EQ(a[2], 13);
