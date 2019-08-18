@@ -4,13 +4,26 @@
 #include <math.h>
 #include <string.h>
 
-void msort(int *a, int start, int end){
+void msort(int *a, int sep, int n){
   int index = 0;
   int min = a[index];
   int tmp;
-  for(int i = start; i < end; i++){
-    for(){
-
+  int end;
+  int right;
+  int left;
+  for(int i = 1; i < n; i += (sep * 3)){
+    if(n <= i){
+      break;
+    }
+    end = i += (sep * 2);
+    for(int j = i; j < end; j++){
+      right = j + sep - 1;
+      left = j - 1;
+      if(a[left] < a[right] && right <= n) {
+        tmp = a[left];
+        a[left] = a[right];
+        a[right] = tmp;
+      }
     }
   }
 }
