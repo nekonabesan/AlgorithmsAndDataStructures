@@ -4,27 +4,67 @@
 #include <math.h>
 #include <string.h>
 
+void merge(int *a, int left, int sep){
+  if(sep == 1){
+    return;
+  }
+  int max = left + (sep * 2);
+  int right = left + sep;
+  int *buf = (int *)malloc((sep * 2) * sizeof(int));
+  for(int i = left; i < (left + sep); i += 2){
+    buf[i] = a[left + i];
+    buf[i + 1] = a[right + i];
+  }
+  for(int i = 0; i < sep; i++){
+    a[left + i] = buf[left + i];
+    a[right + i] = buf[right + i];
+  }
+  free(buf);
+}
+
 void msort(int *a, int sep, int n){
   int index = 0;
   int min = a[index];
-  int tmp;
-  int end;
-  int right;
-  int left;
-  for(int i = 1; i < n; i += (sep * 3)){
+  int tmp = 0;
+  int tmp_left = 0;
+  int tmp_right = 0;
+  int end = 0;
+  int right = 0;
+  int left = 0;
+  if(sep <= 0){
+    return;
+  }
+  for(int i = 0; i < n; i += (sep * 2)) {
     if(n <= i){
       break;
     }
-    end = i += (sep * 2);
-    for(int j = i; j < end; j++){
-      right = j + sep - 1;
-      left = j - 1;
-      if(a[left] < a[right] && right <= n) {
-        tmp = a[left];
-        a[left] = a[right];
-        a[right] = tmp;
+    end += (sep * 2);
+    for(int j = i; j < (end - sep); j++){
+
+      // 右側と左側の検査対象を指すindexを更新する
+      left = j;
+      right = j + sep;
+      printf("%d\n",right);
+
+      if(end < right){
+        if(a[n - 1] < a[left]) {
+          tmp_left = a[left];
+          tmp_right = a[n - 1];
+          a[left] = tmp_right;
+          a[n - 1] = tmp_left;
+        }
+        break;
+      }
+      // 左右比較し入れ替える処理
+      if(a[right] < a[left] && right < n) {
+        tmp_left = a[left];
+        tmp_right = a[right];
+        a[left] = tmp_right;
+        a[right] = tmp_left;
       }
     }
+    merge(a, i, sep);
+    printf("%s\n","/=====================================/");
   }
 }
 
@@ -58,7 +98,7 @@ int* separator(int n){
   return sep;
 }
 
-void merge(int *a, int n){
+/*void merge(int *a, int n){
   int mid = 1;
   int start = 0;
   int end = 0;
@@ -96,4 +136,4 @@ void merge(int *a, int n){
       i++;
     }
   }
-}
+}*/
