@@ -61,6 +61,50 @@ TEST_F(fixtureName, separator3)
 }
 
 //============================================================================//
+// b. quick merge 01
+//============================================================================//
+TEST_F(fixtureName, merge)
+{
+  int *a = (int *)malloc(8 * sizeof(int));
+  int left = 0;
+  int sep = 2;
+  int n = 8;
+  int end = 4;
+  a[0] = 13;
+  a[1] = 55;
+  a[2] = 3;
+  a[3] = 45;
+  a[4] = 74;
+  a[5] = 87;
+  a[6] = 30;
+  a[7] = 46;
+  // case 01
+  // void merge(int *a, int left, int sep, int n, int end)
+  merge(a, left, sep, n, end);
+  EXPECT_EQ(3, a[0]);
+  EXPECT_EQ(13, a[1]);
+  EXPECT_EQ(45, a[2]);
+  EXPECT_EQ(55, a[3]);
+  EXPECT_EQ(74, a[4]);
+  EXPECT_EQ(87, a[5]);
+  EXPECT_EQ(30, a[6]);
+  EXPECT_EQ(46, a[7]);
+  left = 4;
+  end = 8;
+  // case 02
+  /*merge(a, left, sep, n, end);
+  EXPECT_EQ(3, a[0]);
+  EXPECT_EQ(13, a[1]);
+  EXPECT_EQ(45, a[2]);
+  EXPECT_EQ(55, a[3]);
+  EXPECT_EQ(30, a[4]);
+  EXPECT_EQ(46, a[5]);
+  EXPECT_EQ(74, a[6]);
+  EXPECT_EQ(87, a[7]);*/
+  free(a);
+}
+
+//============================================================================//
 // b. quick sort 01
 //============================================================================//
 TEST_F(fixtureName, msort)
@@ -132,7 +176,7 @@ TEST_F(fixtureName, msort2)
   // この関数は、人数 i が負のときは 0 を返し、それ以外はroomprice[i] を返します。
   int *a = (int *)malloc(10 * sizeof(int));
   int *b = separator(10);
-  a[0] = 55;
+  /*a[0] = 55;
   a[1] = 13;
   a[2] = 3;
   a[3] = 45;
@@ -157,7 +201,7 @@ TEST_F(fixtureName, msort2)
   EXPECT_EQ(a[4], 30);
   EXPECT_EQ(a[5], 46);
   EXPECT_EQ(a[6], 74);
-  EXPECT_EQ(a[7], 87);
+  EXPECT_EQ(a[7], 87);*/
   /*msort(a, 2, 8);
   EXPECT_EQ(a[0], 3);
   EXPECT_EQ(a[1], 13);

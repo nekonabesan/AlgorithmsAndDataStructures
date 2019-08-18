@@ -14,15 +14,15 @@ void merge(int *a, int left, int sep, int n, int end){
   int right = left + sep;
   int j = 0;
   int *buf = (int *)malloc((sep * 2) * sizeof(int));
-  for(int i = left; i < end; i+=2){
-    buf[i] = a[i];
-    buf[i + 1] = a[sep + i];
+  for(int i = left; i < end; i++){
+    buf[j] = a[i];
+    buf[j + 1] = a[i + sep];
     //printf("%d\n", i);
-    printf("%s\n","/=====================================/");
-    printf("%d\n", a[i]);
-    printf("%d\n", a[i+1]);
-    printf("%s\n","/=====================================/");
-    //j += 2;
+    //printf("%s\n","/=====================================/");
+    //printf("%d\n", a[i]);
+    //printf("%d\n", a[i+1]);
+    //printf("%s\n","/=====================================/");
+    j += 2;
   }
   //printf("%s\n","/=====================================/");
   for(int i = 0; i < (sep * 2); i++){
