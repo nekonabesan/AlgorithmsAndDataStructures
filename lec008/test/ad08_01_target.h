@@ -17,7 +17,8 @@ void shell(int *a, int n);
 void quick_01(int *a, int n);
 // ad08_03
 int* separator(int n);
-void merge(int *a, int left, int sep, int n, int end);
+void merge(int *a, int left, int sep, int n);
+int convert(int *a, int left, int sep);
 void msort(int *a, int sep, int n);
 
 #endif /* _TARGET_H_ */

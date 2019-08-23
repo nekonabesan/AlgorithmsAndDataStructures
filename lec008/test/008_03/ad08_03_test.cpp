@@ -63,13 +63,12 @@ TEST_F(fixtureName, separator3)
 //============================================================================//
 // b. quick merge 01
 //============================================================================//
-TEST_F(fixtureName, merge)
+TEST_F(fixtureName, merge01)
 {
   int *a = (int *)malloc(8 * sizeof(int));
   int left = 0;
   int sep = 2;
   int n = 8;
-  int end = 4;
   a[0] = 13;
   a[1] = 55;
   a[2] = 3;
@@ -80,7 +79,7 @@ TEST_F(fixtureName, merge)
   a[7] = 46;
   // case 01
   // void merge(int *a, int left, int sep, int n, int end)
-  merge(a, left, sep, n, end);
+  merge(a, left, sep, n);
   EXPECT_EQ(3, a[0]);
   EXPECT_EQ(13, a[1]);
   EXPECT_EQ(45, a[2]);
@@ -90,9 +89,8 @@ TEST_F(fixtureName, merge)
   EXPECT_EQ(30, a[6]);
   EXPECT_EQ(46, a[7]);
   left = 4;
-  end = 8;
   // case 02
-  merge(a, left, sep, n, end);
+  merge(a, left, sep, n);
   EXPECT_EQ(3, a[0]);
   EXPECT_EQ(13, a[1]);
   EXPECT_EQ(45, a[2]);
@@ -101,8 +99,120 @@ TEST_F(fixtureName, merge)
   EXPECT_EQ(46, a[5]);
   EXPECT_EQ(74, a[6]);
   EXPECT_EQ(87, a[7]);
+  // case 03
+  left = 0;
+  sep = 4;
+  merge(a, left, sep, n);
+  EXPECT_EQ(3, a[0]);
+  EXPECT_EQ(13, a[1]);
+  EXPECT_EQ(30, a[2]);
+  EXPECT_EQ(45, a[3]);
+  EXPECT_EQ(46, a[4]);
+  EXPECT_EQ(55, a[5]);
+  EXPECT_EQ(74, a[6]);
+  EXPECT_EQ(87, a[7]);
   free(a);
 }
+
+//============================================================================//
+// b. quick merge 02
+//============================================================================//
+TEST_F(fixtureName, merge02)
+{
+  int *a = (int *)malloc(7 * sizeof(int));
+  int left = 0;
+  int sep = 1;
+  int n = 7;
+  a[0] = 7;
+  a[1] = 6;
+  a[2] = 5;
+  a[3] = 4;
+  a[4] = 3;
+  a[5] = 2;
+  a[6] = 1;
+  // case 01
+  merge(a, left, sep, n);
+  EXPECT_EQ(6, a[0]);
+  EXPECT_EQ(7, a[1]);
+  EXPECT_EQ(5, a[2]);
+  EXPECT_EQ(4, a[3]);
+  EXPECT_EQ(3, a[4]);
+  EXPECT_EQ(2, a[5]);
+  EXPECT_EQ(1, a[6]);
+  // case 02
+  left = 2;
+  merge(a, left, sep, n);
+  EXPECT_EQ(6, a[0]);
+  EXPECT_EQ(7, a[1]);
+  EXPECT_EQ(4, a[2]);
+  EXPECT_EQ(5, a[3]);
+  EXPECT_EQ(3, a[4]);
+  EXPECT_EQ(2, a[5]);
+  EXPECT_EQ(1, a[6]);
+  // case 03
+  left = 4;
+  merge(a, left, sep, n);
+  EXPECT_EQ(6, a[0]);
+  EXPECT_EQ(7, a[1]);
+  EXPECT_EQ(4, a[2]);
+  EXPECT_EQ(5, a[3]);
+  EXPECT_EQ(2, a[4]);
+  EXPECT_EQ(3, a[5]);
+  EXPECT_EQ(1, a[6]);
+  // case 04
+  left = 5;
+  merge(a, left, sep, n);
+  EXPECT_EQ(6, a[0]);
+  EXPECT_EQ(7, a[1]);
+  EXPECT_EQ(4, a[2]);
+  EXPECT_EQ(5, a[3]);
+  EXPECT_EQ(2, a[4]);
+  EXPECT_EQ(1, a[5]);
+  EXPECT_EQ(3, a[6]);
+  // case 05
+  sep = 2;
+  left = 0;
+  merge(a, left, sep, n);
+  EXPECT_EQ(4, a[0]);
+  EXPECT_EQ(5, a[1]);
+  EXPECT_EQ(6, a[2]);
+  EXPECT_EQ(7, a[3]);
+  EXPECT_EQ(2, a[4]);
+  EXPECT_EQ(1, a[5]);
+  EXPECT_EQ(3, a[6]);
+  // case 05
+  sep = 2;
+  left = 3;
+  merge(a, left, sep, n);
+  EXPECT_EQ(4, a[0]);
+  EXPECT_EQ(5, a[1]);
+  EXPECT_EQ(6, a[2]);
+  EXPECT_EQ(1, a[3]);
+  EXPECT_EQ(2, a[4]);
+  EXPECT_EQ(3, a[5]);
+  EXPECT_EQ(7, a[6]);
+}
+
+//============================================================================//
+// b. quick sort 01
+//============================================================================//
+TEST_F(fixtureName, conv)
+{
+  int *a = (int *)malloc(7 * sizeof(int));
+  int left = 0;
+  int sep = 2;
+  int n = 7;
+  a[0] = 6;
+  a[1] = 7;
+  a[2] = 5;
+  a[3] = 4;
+  a[4] = 1;
+  a[5] = 2;
+  a[6] = 2;
+  // int convert(int *a, int left, int sep);
+  //convert(int *a, int left, int sep);
+}
+
 
 //============================================================================//
 // b. quick sort 01

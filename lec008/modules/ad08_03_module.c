@@ -4,57 +4,73 @@
 #include <math.h>
 #include <string.h>
 
-void merge(int *a, int left, int sep, int n, int end){
+void merge(int *a, int left, int sep, int n){
   // セパレータが2以下の場合、処理対象外
-  if(sep <= 1){
-    return;
-  }
-  //printf("%d\n", sep);
   int max = left + (sep * 2);
+  int med = left + sep;
   int right = left + sep;
   int l = left;
   int r = right;
-  int j = 0;
   int i = 0;
   int tmp = 0;
   int *buf = (int *)malloc((sep * 2) * sizeof(int));
-  while(l < right && r < (right + sep)){
+  while(l < med && r < max && i < (sep * 2)){
     if(a[r] < a[l]){
-      tmp = a[l];
       buf[i] = a[r];
-      buf[r] = tmp;
       r++;
     } else {
-      tmp = a[r];
       buf[i] = a[l];
-      a[l] = tmp;
       l++;
     }
     i++;
   }
-  if(l == (left + sep)){
+  if(right <= l){
     while(r < max){
-        buf[i] = a[r + i];
-        r++;
-        i++;
+      buf[i] = a[r];
+      r++;
+      i++;
     }
   } else {
-    while(l < max){
-        buf[i] = a[l + i];
-        l++;
-        i++;
+    while(l < med){
+      buf[i] = a[l];
+      l++;
+      i++;
     }
   }
-  printf("%d\n", i);
   //printf("%s\n","/=====================================/");
-  for(i = 0; i < (sep * 2); i++){
-    //printf("%d\n", buf[i]);
-    a[left + i] = buf[i];
-    //a[right + i] = buf[sep + i];
+  for(int j = 0; j < (sep * 2); j++){
+    //printf("%d\n", buf[j]);
+    a[left + j] = buf[j];
   }
   //printf("%s\n","/=====================================/");
   free(buf);
 }
+
+/*int convert(int *a, int left, int sep){
+  int max = left + (sep * 2);
+  int med = left + sep;
+  int right = left + sep;
+
+  end += (sep * 2);
+  for(int j = 0; j < (left + sep); j+=1){
+    left = j;
+    right = left + sep;
+    if(end < right){
+      if(a[n - 1] < a[left]) {
+        tmp_left = a[left];
+        tmp_right = a[n - 1];
+      }
+      break;
+    }
+    // 左右比較し入れ替える処理
+    if(a[right] < a[left]) {
+      tmp_left = a[left];
+      tmp_right = a[right];
+      a[left] = tmp_right;
+      a[right] = tmp_left;
+    }
+  }
+}*/
 
 void msort(int *a, int sep, int n){
   int index = 0;
@@ -70,45 +86,16 @@ void msort(int *a, int sep, int n){
   if(n % 2 != 0){
     mid += 1;
   }
-  for(int i = 0; i < (n - sep); i += (sep * 2)) {
+  for(int i = 0; i < mid; i += (sep * 2)) {
     if(n <= i){
       break;
     }
-    end += (sep * 2);
-    //printf("end : %d\n", end);
-    //printf("end : %d\n",end);
-    //printf("%s\n","/=====================================/");
-    for(int j = i; j < (i + sep); j+=1){
-      //printf("%s\n","/=====================================/");
-      //printf("i : %d\n", i);
-      //printf("j : %d\n",j);
-      //printf("%s\n","/=====================================/");
-      // 右側と左側の検査対象を指すindexを更新する
-      left = j;
-      right = left + sep;
-      //printf("left : %d\n",left);
-      //printf("right : %d\n",right);
-      if(end < right){
-        if(a[n - 1] < a[left]) {
-          tmp_left = a[left];
-          tmp_right = a[n - 1];
-          //a[left] = tmp_right;
-          //a[n - 1] = tmp_left;
-        }
-        break;
-      }
-      // 左右比較し入れ替える処理
-      if(a[right] < a[left]) {
-        tmp_left = a[left];
-        tmp_right = a[right];
-        a[left] = tmp_right;
-        a[right] = tmp_left;
-      }
-    }
+    //convert(a,  i, sep);
     printf("%s\n","/=====================================/");
-    merge(a, i, sep, n, end);
+    merge(a, i, i, n);
   }
 }
+
 
 int* separator(int n){
   int cnt = 0;
