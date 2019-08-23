@@ -92,7 +92,7 @@ TEST_F(fixtureName, merge)
   left = 4;
   end = 8;
   // case 02
-  /*merge(a, left, sep, n, end);
+  merge(a, left, sep, n, end);
   EXPECT_EQ(3, a[0]);
   EXPECT_EQ(13, a[1]);
   EXPECT_EQ(45, a[2]);
@@ -100,7 +100,7 @@ TEST_F(fixtureName, merge)
   EXPECT_EQ(30, a[4]);
   EXPECT_EQ(46, a[5]);
   EXPECT_EQ(74, a[6]);
-  EXPECT_EQ(87, a[7]);*/
+  EXPECT_EQ(87, a[7]);
   free(a);
 }
 

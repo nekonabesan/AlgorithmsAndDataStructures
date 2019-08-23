@@ -12,20 +12,42 @@ void merge(int *a, int left, int sep, int n, int end){
   //printf("%d\n", sep);
   int max = left + (sep * 2);
   int right = left + sep;
+  int l = left;
+  int r = right;
   int j = 0;
+  int i = 0;
+  int tmp = 0;
   int *buf = (int *)malloc((sep * 2) * sizeof(int));
-  for(int i = left; i < end; i++){
-    buf[j] = a[i];
-    buf[j + 1] = a[i + sep];
-    //printf("%d\n", i);
-    //printf("%s\n","/=====================================/");
-    //printf("%d\n", a[i]);
-    //printf("%d\n", a[i+1]);
-    //printf("%s\n","/=====================================/");
-    j += 2;
+  while(l < right && r < (right + sep)){
+    if(a[r] < a[l]){
+      tmp = a[l];
+      buf[i] = a[r];
+      buf[r] = tmp;
+      r++;
+    } else {
+      tmp = a[r];
+      buf[i] = a[l];
+      a[l] = tmp;
+      l++;
+    }
+    i++;
   }
+  if(l == (left + sep)){
+    while(r < max){
+        buf[i] = a[r + i];
+        r++;
+        i++;
+    }
+  } else {
+    while(l < max){
+        buf[i] = a[l + i];
+        l++;
+        i++;
+    }
+  }
+  printf("%d\n", i);
   //printf("%s\n","/=====================================/");
-  for(int i = 0; i < (sep * 2); i++){
+  for(i = 0; i < (sep * 2); i++){
     //printf("%d\n", buf[i]);
     a[left + i] = buf[i];
     //a[right + i] = buf[sep + i];
