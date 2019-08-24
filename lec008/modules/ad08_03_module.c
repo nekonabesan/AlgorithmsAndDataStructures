@@ -7,32 +7,6 @@
 #include <math.h>
 #include <string.h>
 
-int* separator(int n){
-  int cnt = 0;
-  int tmp;
-  int i = n;
-  int j = 1;
-  // 戻り値の要素数を取得する処理
-  for(j = 1; j < n; j *= 2){
-    if(n < j){
-      break;
-    }
-    cnt++;
-  }
-  int *sep = (int *)malloc(cnt * sizeof(int));
-  sep[cnt] = i;
-  cnt--;
-  while(1){
-    if(cnt < 0){
-      break;
-    }
-    i /= 2;
-    sep[cnt] = i;
-    cnt--;
-  }
-  return sep;
-}
-
 void merge(int *a, int left, int mid, int right){
   int l = left;
   int r = mid;

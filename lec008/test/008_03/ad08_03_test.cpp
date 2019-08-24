@@ -28,37 +28,6 @@ protected:
 }*/
 
 //============================================================================//
-// b. separator
-//============================================================================//
-TEST_F(fixtureName, separator1)
-{
-  int *b = separator(10);
-  EXPECT_EQ(10, b[4]);
-  EXPECT_EQ(5, b[3]);
-  EXPECT_EQ(2, b[2]);
-  EXPECT_EQ(1, b[1]);
-  EXPECT_EQ(0, b[0]);
-  free(b);
-}
-TEST_F(fixtureName, separator2)
-{
-  int *b = separator(8);
-  EXPECT_EQ(8, b[3]);
-  EXPECT_EQ(4, b[2]);
-  EXPECT_EQ(2, b[1]);
-  EXPECT_EQ(1, b[0]);
-  free(b);
-}
-TEST_F(fixtureName, separator3)
-{
-  int *b = separator(7);
-  EXPECT_EQ(3, b[2]);
-  EXPECT_EQ(1, b[1]);
-  EXPECT_EQ(0, b[0]);
-  free(b);
-}
-
-//============================================================================//
 // b. quick merge 01
 //============================================================================//
 TEST_F(fixtureName, merge01)
