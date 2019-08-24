@@ -4,42 +4,61 @@
 #include <math.h>
 #include <string.h>
 
+void bsort(int *a, int start, int end){
+  int tmp;
+  for(int i = start; i < (end - 1); i++){
+    for(int j = (end - 1); i < j ; j--){
+        if(a[j - 1] > a[j]){
+          tmp = a[j];
+          a[j] = a[j - 1];
+          a[j - 1] = tmp;
+        }
+    }
+  }
+}
+
+
 void merge(int *a, int left, int sep, int n){
   // セパレータが2以下の場合、処理対象外
-  int max = left + (sep * 2);
   int med = left + sep;
-  int right = left + sep;
+  int right = left + (sep * 2);
   int l = left;
-  int r = right;
+  int r = right -  1;
   int i = 0;
   int tmp = 0;
+  int min = 0;
   int *buf = (int *)malloc((sep * 2) * sizeof(int));
-  while(l < med && r < max && i < (sep * 2)){
+  while(l < med && med <= r){
     if(a[r] < a[l]){
       buf[i] = a[r];
-      r++;
+      r--;
     } else {
       buf[i] = a[l];
       l++;
     }
     i++;
   }
-  if(right <= l){
-    while(r < max){
+  if(med <= l){
+    tmp = i;
+    while(med <= r){
       buf[i] = a[r];
-      r++;
+      r--;
       i++;
     }
+    //bsort(buf, tmp, (sep * 2));
   } else {
+    tmp = i;
     while(l < med){
       buf[i] = a[l];
       l++;
       i++;
     }
+    //bsort(buf, tmp, (sep * 2));
   }
+
   //printf("%s\n","/=====================================/");
   for(int j = 0; j < (sep * 2); j++){
-    //printf("%d\n", buf[j]);
+    printf("%d\n", buf[j]);
     a[left + j] = buf[j];
   }
   //printf("%s\n","/=====================================/");

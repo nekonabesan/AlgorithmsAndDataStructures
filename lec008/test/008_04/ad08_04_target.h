@@ -13,13 +13,7 @@
 #define FALSE 0
 
 // 以下のプロトタイプ宣言
-void shell(int *a, int n);
-void quick_01(int *a, int n);
-// ad08_03
-void bsort(int *a, int start, int end);
-int* separator(int n);
-void merge(int *a, int left, int sep, int n);
-int convert(int *a, int left, int sep);
-void msort(int *a, int sep, int n);
+void mearge(int *a, int left, int mid, int right);
+void msort(int *a, int left, int right);
 
 #endif /* _TARGET_H_ */

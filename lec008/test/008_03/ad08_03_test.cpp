@@ -20,17 +20,17 @@ protected:
 };
 
 // 成功するテストケース。細かい説明はGoogleTestのマニュアルを見てね。
-TEST_F(fixtureName, sample)
+/*TEST_F(fixtureName, sample)
 {
   //initialize では先のアルゴリズムによって roomprice を順に初期化しています
   //int *roomprice = (int *)malloc(rmax * sizeof(int));
   //int *roomsel = (int *)malloc(rmax * sizeof(int));
-}
+}*/
 
 //============================================================================//
 // b. separator
 //============================================================================//
-TEST_F(fixtureName, separator1)
+/*TEST_F(fixtureName, separator1)
 {
   int *b = separator(10);
   EXPECT_EQ(10, b[4]);
@@ -58,17 +58,16 @@ TEST_F(fixtureName, separator3)
   EXPECT_EQ(2, b[1]);
   EXPECT_EQ(1, b[0]);
   free(b);
-}
+}*/
 
 //============================================================================//
-// b. quick merge 01
+// b. bsort
 //============================================================================//
-TEST_F(fixtureName, merge01)
+/*TEST_F(fixtureName, bsort01)
 {
   int *a = (int *)malloc(8 * sizeof(int));
-  int left = 0;
-  int sep = 2;
-  int n = 8;
+  int start = 0;
+  int end = 8;
   a[0] = 13;
   a[1] = 55;
   a[2] = 3;
@@ -77,32 +76,7 @@ TEST_F(fixtureName, merge01)
   a[5] = 87;
   a[6] = 30;
   a[7] = 46;
-  // case 01
-  // void merge(int *a, int left, int sep, int n, int end)
-  merge(a, left, sep, n);
-  EXPECT_EQ(3, a[0]);
-  EXPECT_EQ(13, a[1]);
-  EXPECT_EQ(45, a[2]);
-  EXPECT_EQ(55, a[3]);
-  EXPECT_EQ(74, a[4]);
-  EXPECT_EQ(87, a[5]);
-  EXPECT_EQ(30, a[6]);
-  EXPECT_EQ(46, a[7]);
-  left = 4;
-  // case 02
-  merge(a, left, sep, n);
-  EXPECT_EQ(3, a[0]);
-  EXPECT_EQ(13, a[1]);
-  EXPECT_EQ(45, a[2]);
-  EXPECT_EQ(55, a[3]);
-  EXPECT_EQ(30, a[4]);
-  EXPECT_EQ(46, a[5]);
-  EXPECT_EQ(74, a[6]);
-  EXPECT_EQ(87, a[7]);
-  // case 03
-  left = 0;
-  sep = 4;
-  merge(a, left, sep, n);
+  bsort(a, start, end);
   EXPECT_EQ(3, a[0]);
   EXPECT_EQ(13, a[1]);
   EXPECT_EQ(30, a[2]);
@@ -111,6 +85,71 @@ TEST_F(fixtureName, merge01)
   EXPECT_EQ(55, a[5]);
   EXPECT_EQ(74, a[6]);
   EXPECT_EQ(87, a[7]);
+  free(a);
+}*/
+
+//============================================================================//
+// b. quick merge 01
+//============================================================================//
+TEST_F(fixtureName, merge01)
+{
+  int *a = (int *)malloc(8 * sizeof(int));
+  int left = 0;
+  int sep = 1;
+  int n = 8;
+  a[0] = 55;
+  a[1] = 13;
+  a[2] = 3;
+  a[3] = 45;
+  a[4] = 74;
+  a[5] = 87;
+  a[6] = 46;
+  a[7] = 30;
+  // case 01
+  // void merge(int *a, int left, int sep, int n, int end)
+  /*merge(a, left, sep, n);
+  EXPECT_EQ(13, a[0]);
+  EXPECT_EQ(55, a[1]);
+  EXPECT_EQ(3, a[2]);
+  EXPECT_EQ(45, a[3]);
+  EXPECT_EQ(74, a[4]);
+  EXPECT_EQ(87, a[5]);
+  EXPECT_EQ(46, a[6]);
+  EXPECT_EQ(30, a[7]);
+  // case 02
+  // void merge(int *a, int left, int sep, int n, int end)
+  left = 2;
+  merge(a, left, sep, n);
+  EXPECT_EQ(13, a[0]);
+  EXPECT_EQ(55, a[1]);
+  EXPECT_EQ(3, a[2]);
+  EXPECT_EQ(45, a[3]);
+  EXPECT_EQ(74, a[4]);
+  EXPECT_EQ(87, a[5]);
+  EXPECT_EQ(46, a[6]);
+  EXPECT_EQ(30, a[7]);
+  left = 4;
+  // case 02
+  merge(a, left, sep, n);
+  EXPECT_EQ(13, a[0]);
+  EXPECT_EQ(55, a[1]);
+  EXPECT_EQ(3, a[2]);
+  EXPECT_EQ(45, a[3]);
+  EXPECT_EQ(74, a[4]);
+  EXPECT_EQ(87, a[5]);
+  EXPECT_EQ(46, a[6]);
+  EXPECT_EQ(30, a[7]);
+  // case 03
+  left = 6;
+  merge(a, left, sep, n);
+  EXPECT_EQ(13, a[0]);
+  EXPECT_EQ(55, a[1]);
+  EXPECT_EQ(3, a[2]);
+  EXPECT_EQ(45, a[3]);
+  EXPECT_EQ(74, a[4]);
+  EXPECT_EQ(87, a[5]);
+  EXPECT_EQ(30, a[6]);
+  EXPECT_EQ(46, a[7]);*/
   free(a);
 }
 
@@ -160,18 +199,20 @@ TEST_F(fixtureName, merge02)
   EXPECT_EQ(3, a[5]);
   EXPECT_EQ(1, a[6]);
   // case 04
-  left = 5;
-  merge(a, left, sep, n);
-  EXPECT_EQ(6, a[0]);
-  EXPECT_EQ(7, a[1]);
-  EXPECT_EQ(4, a[2]);
-  EXPECT_EQ(5, a[3]);
-  EXPECT_EQ(2, a[4]);
-  EXPECT_EQ(1, a[5]);
-  EXPECT_EQ(3, a[6]);
-  // case 05
-  sep = 2;
   left = 0;
+  sep = 2;
+  merge(a, left, sep, n);
+  EXPECT_EQ(4, a[0]);
+  EXPECT_EQ(5, a[1]);
+  EXPECT_EQ(6, a[2]);
+  EXPECT_EQ(7, a[3]);
+  EXPECT_EQ(2, a[4]);
+  EXPECT_EQ(3, a[5]);
+  EXPECT_EQ(1, a[6]);
+  // case 05
+  /*sep = 2;
+  left = 0;
+  n = 4;
   merge(a, left, sep, n);
   EXPECT_EQ(4, a[0]);
   EXPECT_EQ(5, a[1]);
@@ -191,12 +232,23 @@ TEST_F(fixtureName, merge02)
   EXPECT_EQ(2, a[4]);
   EXPECT_EQ(3, a[5]);
   EXPECT_EQ(7, a[6]);
+  // case 06
+  sep = 4;
+  left = 0;
+  /*merge(a, left, sep, n);
+  EXPECT_EQ(1, a[0]);
+  EXPECT_EQ(2, a[1]);
+  EXPECT_EQ(3, a[2]);
+  EXPECT_EQ(4, a[3]);
+  EXPECT_EQ(5, a[4]);
+  EXPECT_EQ(6, a[5]);
+  EXPECT_EQ(7, a[6]);*/
 }
 
 //============================================================================//
 // b. quick sort 01
 //============================================================================//
-TEST_F(fixtureName, conv)
+/*TEST_F(fixtureName, conv)
 {
   int *a = (int *)malloc(7 * sizeof(int));
   int left = 0;
@@ -211,13 +263,13 @@ TEST_F(fixtureName, conv)
   a[6] = 2;
   // int convert(int *a, int left, int sep);
   //convert(int *a, int left, int sep);
-}
+}*/
 
 
 //============================================================================//
 // b. quick sort 01
 //============================================================================//
-TEST_F(fixtureName, msort)
+/*TEST_F(fixtureName, msort)
 {
   // 値を読み出す時には room1 という下請け関数を呼びます。
   // この関数は、人数 i が負のときは 0 を返し、それ以外はroomprice[i] を返します。
@@ -233,7 +285,7 @@ TEST_F(fixtureName, msort)
   a[7] = 87;
   a[8] = 46;
   a[9] = 30;
-  /*msort(a, 1, 10);
+  msort(a, 1, 10);
   EXPECT_EQ(a[0], 6);
   EXPECT_EQ(a[1], 20);
   EXPECT_EQ(a[2], 55);
@@ -276,7 +328,7 @@ TEST_F(fixtureName, msort)
   EXPECT_EQ(a[6], 13);
   EXPECT_EQ(a[7], 87);
   EXPECT_EQ(a[8], 74);
-  EXPECT_EQ(a[9], 46);*/
+  EXPECT_EQ(a[9], 46);
   free(a);
   free(b);
 }
@@ -320,10 +372,10 @@ TEST_F(fixtureName, msort2)
   EXPECT_EQ(a[4], 46);
   EXPECT_EQ(a[5], 55);
   EXPECT_EQ(a[6], 74);
-  EXPECT_EQ(a[7], 87);*/
+  EXPECT_EQ(a[7], 87);
   free(a);
   free(b);
-}
+}*/
 //============================================================================//
 // c. 帰りがけ順
 //============================================================================//
