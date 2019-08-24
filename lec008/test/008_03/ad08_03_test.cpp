@@ -95,8 +95,8 @@ TEST_F(fixtureName, merge01)
 {
   int *a = (int *)malloc(8 * sizeof(int));
   int left = 0;
-  int sep = 1;
-  int n = 8;
+  int mid = 1;
+  int right = 2;
   a[0] = 55;
   a[1] = 13;
   a[2] = 3;
@@ -106,8 +106,7 @@ TEST_F(fixtureName, merge01)
   a[6] = 46;
   a[7] = 30;
   // case 01
-  // void merge(int *a, int left, int sep, int n, int end)
-  /*merge(a, left, sep, n);
+  merge(a, left, mid, right);
   EXPECT_EQ(13, a[0]);
   EXPECT_EQ(55, a[1]);
   EXPECT_EQ(3, a[2]);
@@ -117,20 +116,10 @@ TEST_F(fixtureName, merge01)
   EXPECT_EQ(46, a[6]);
   EXPECT_EQ(30, a[7]);
   // case 02
-  // void merge(int *a, int left, int sep, int n, int end)
   left = 2;
-  merge(a, left, sep, n);
-  EXPECT_EQ(13, a[0]);
-  EXPECT_EQ(55, a[1]);
-  EXPECT_EQ(3, a[2]);
-  EXPECT_EQ(45, a[3]);
-  EXPECT_EQ(74, a[4]);
-  EXPECT_EQ(87, a[5]);
-  EXPECT_EQ(46, a[6]);
-  EXPECT_EQ(30, a[7]);
-  left = 4;
-  // case 02
-  merge(a, left, sep, n);
+  mid = 3;
+  right = 4;
+  merge(a, left, mid, right);
   EXPECT_EQ(13, a[0]);
   EXPECT_EQ(55, a[1]);
   EXPECT_EQ(3, a[2]);
@@ -140,16 +129,71 @@ TEST_F(fixtureName, merge01)
   EXPECT_EQ(46, a[6]);
   EXPECT_EQ(30, a[7]);
   // case 03
+  left = 0;
+  mid = 2;
+  right = 4;
+  merge(a, left, mid, right);
+  EXPECT_EQ(3, a[0]);
+  EXPECT_EQ(13, a[1]);
+  EXPECT_EQ(45, a[2]);
+  EXPECT_EQ(55, a[3]);
+  EXPECT_EQ(74, a[4]);
+  EXPECT_EQ(87, a[5]);
+  EXPECT_EQ(46, a[6]);
+  EXPECT_EQ(30, a[7]);
+  // case 04
+  left = 4;
+  mid = 5;
+  right = 6;
+  merge(a, left, mid, right);
+  EXPECT_EQ(3, a[0]);
+  EXPECT_EQ(13, a[1]);
+  EXPECT_EQ(45, a[2]);
+  EXPECT_EQ(55, a[3]);
+  EXPECT_EQ(74, a[4]);
+  EXPECT_EQ(87, a[5]);
+  EXPECT_EQ(46, a[6]);
+  EXPECT_EQ(30, a[7]);
+  // case 05
   left = 6;
-  merge(a, left, sep, n);
-  EXPECT_EQ(13, a[0]);
-  EXPECT_EQ(55, a[1]);
-  EXPECT_EQ(3, a[2]);
-  EXPECT_EQ(45, a[3]);
+  mid = 7;
+  right = 8;
+  merge(a, left, mid, right);
+  EXPECT_EQ(3, a[0]);
+  EXPECT_EQ(13, a[1]);
+  EXPECT_EQ(45, a[2]);
+  EXPECT_EQ(55, a[3]);
   EXPECT_EQ(74, a[4]);
   EXPECT_EQ(87, a[5]);
   EXPECT_EQ(30, a[6]);
-  EXPECT_EQ(46, a[7]);*/
+  EXPECT_EQ(46, a[7]);
+  // case 06
+  left = 4;
+  mid = 6;
+  right = 8;
+  merge(a, left, mid, right);
+  EXPECT_EQ(3, a[0]);
+  EXPECT_EQ(13, a[1]);
+  EXPECT_EQ(45, a[2]);
+  EXPECT_EQ(55, a[3]);
+  EXPECT_EQ(30, a[4]);
+  EXPECT_EQ(46, a[5]);
+  EXPECT_EQ(74, a[6]);
+  EXPECT_EQ(87, a[7]);
+  // case 07
+  left = 0;
+  mid = 4;
+  right = 8;
+  merge(a, left, mid, right);
+  EXPECT_EQ(3, a[0]);
+  EXPECT_EQ(13, a[1]);
+  EXPECT_EQ(30, a[2]);
+  EXPECT_EQ(45, a[3]);
+  EXPECT_EQ(46, a[4]);
+  EXPECT_EQ(55, a[5]);
+  EXPECT_EQ(74, a[6]);
+  EXPECT_EQ(87, a[7]);
+  // free
   free(a);
 }
 
@@ -160,8 +204,8 @@ TEST_F(fixtureName, merge02)
 {
   int *a = (int *)malloc(7 * sizeof(int));
   int left = 0;
-  int sep = 1;
-  int n = 7;
+  int mid = 1;
+  int right = 2;
   a[0] = 7;
   a[1] = 6;
   a[2] = 5;
@@ -170,7 +214,7 @@ TEST_F(fixtureName, merge02)
   a[5] = 2;
   a[6] = 1;
   // case 01
-  merge(a, left, sep, n);
+  merge(a, left, mid, right);
   EXPECT_EQ(6, a[0]);
   EXPECT_EQ(7, a[1]);
   EXPECT_EQ(5, a[2]);
@@ -180,7 +224,9 @@ TEST_F(fixtureName, merge02)
   EXPECT_EQ(1, a[6]);
   // case 02
   left = 2;
-  merge(a, left, sep, n);
+  mid = 3;
+  right = 4;
+  merge(a, left, mid, right);
   EXPECT_EQ(6, a[0]);
   EXPECT_EQ(7, a[1]);
   EXPECT_EQ(4, a[2]);
@@ -189,19 +235,22 @@ TEST_F(fixtureName, merge02)
   EXPECT_EQ(2, a[5]);
   EXPECT_EQ(1, a[6]);
   // case 03
-  left = 4;
-  merge(a, left, sep, n);
-  EXPECT_EQ(6, a[0]);
-  EXPECT_EQ(7, a[1]);
-  EXPECT_EQ(4, a[2]);
-  EXPECT_EQ(5, a[3]);
-  EXPECT_EQ(2, a[4]);
-  EXPECT_EQ(3, a[5]);
+  left = 0;
+  mid = 2;
+  right = 4;
+  merge(a, left, mid, right);
+  EXPECT_EQ(4, a[0]);
+  EXPECT_EQ(5, a[1]);
+  EXPECT_EQ(6, a[2]);
+  EXPECT_EQ(7, a[3]);
+  EXPECT_EQ(3, a[4]);
+  EXPECT_EQ(2, a[5]);
   EXPECT_EQ(1, a[6]);
   // case 04
-  left = 0;
-  sep = 2;
-  merge(a, left, sep, n);
+  left = 4;
+  mid = 5;
+  right = 6;
+  merge(a, left, mid, right);
   EXPECT_EQ(4, a[0]);
   EXPECT_EQ(5, a[1]);
   EXPECT_EQ(6, a[2]);
@@ -209,40 +258,32 @@ TEST_F(fixtureName, merge02)
   EXPECT_EQ(2, a[4]);
   EXPECT_EQ(3, a[5]);
   EXPECT_EQ(1, a[6]);
-  // case 05
-  /*sep = 2;
-  left = 0;
-  n = 4;
-  merge(a, left, sep, n);
+  // case 06
+  left = 4;
+  mid = 6;
+  right = 8;
+  merge(a, left, mid, right);
   EXPECT_EQ(4, a[0]);
   EXPECT_EQ(5, a[1]);
   EXPECT_EQ(6, a[2]);
   EXPECT_EQ(7, a[3]);
-  EXPECT_EQ(2, a[4]);
-  EXPECT_EQ(1, a[5]);
+  EXPECT_EQ(1, a[4]);
+  EXPECT_EQ(2, a[5]);
   EXPECT_EQ(3, a[6]);
-  // case 05
-  sep = 2;
-  left = 3;
-  merge(a, left, sep, n);
-  EXPECT_EQ(4, a[0]);
-  EXPECT_EQ(5, a[1]);
-  EXPECT_EQ(6, a[2]);
-  EXPECT_EQ(1, a[3]);
-  EXPECT_EQ(2, a[4]);
-  EXPECT_EQ(3, a[5]);
-  EXPECT_EQ(7, a[6]);
-  // case 06
-  sep = 4;
+  // case 07
   left = 0;
-  /*merge(a, left, sep, n);
+  mid = 4;
+  right = 8;
+  merge(a, left, mid, right);
   EXPECT_EQ(1, a[0]);
   EXPECT_EQ(2, a[1]);
   EXPECT_EQ(3, a[2]);
   EXPECT_EQ(4, a[3]);
   EXPECT_EQ(5, a[4]);
   EXPECT_EQ(6, a[5]);
-  EXPECT_EQ(7, a[6]);*/
+  EXPECT_EQ(7, a[6]);
+  //
+  free(a);
 }
 
 //============================================================================//

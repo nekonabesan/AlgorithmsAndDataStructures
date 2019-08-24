@@ -1,68 +1,44 @@
+//============================================================================//
+// マージソート(NOT 再帰)
+//============================================================================//
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
 #include <string.h>
 
-void bsort(int *a, int start, int end){
-  int tmp;
-  for(int i = start; i < (end - 1); i++){
-    for(int j = (end - 1); i < j ; j--){
-        if(a[j - 1] > a[j]){
-          tmp = a[j];
-          a[j] = a[j - 1];
-          a[j - 1] = tmp;
-        }
-    }
-  }
-}
-
-
-void merge(int *a, int left, int sep, int n){
-  // セパレータが2以下の場合、処理対象外
-  int med = left + sep;
-  int right = left + (sep * 2);
+void merge(int *a, int left, int mid, int right){
   int l = left;
-  int r = right -  1;
-  int i = 0;
-  int tmp = 0;
-  int min = 0;
-  int *buf = (int *)malloc((sep * 2) * sizeof(int));
-  while(l < med && med <= r){
-    if(a[r] < a[l]){
-      buf[i] = a[r];
-      r--;
-    } else {
-      buf[i] = a[l];
+  int r = mid;
+  int index = 0;
+  int *b = (int *)malloc((right - left) * sizeof(int));
+  while(l < mid && r < right){
+    if(a[l] < a[r]){
+      b[index] = a[l];
       l++;
+    }else{
+      b[index] = a[r];
+      r++;
     }
-    i++;
+    index++;
   }
-  if(med <= l){
-    tmp = i;
-    while(med <= r){
-      buf[i] = a[r];
-      r--;
-      i++;
+  if(l == mid){
+    while(r < right){
+      b[index] = a[r];
+      r++;
+      index++;
     }
-    //bsort(buf, tmp, (sep * 2));
   } else {
-    tmp = i;
-    while(l < med){
-      buf[i] = a[l];
+    while(l < mid){
+      b[index] = a[l];
       l++;
-      i++;
+      index++;
     }
-    //bsort(buf, tmp, (sep * 2));
   }
-
-  //printf("%s\n","/=====================================/");
-  for(int j = 0; j < (sep * 2); j++){
-    printf("%d\n", buf[j]);
-    a[left + j] = buf[j];
+  for(int j = 0; j < index; j++){
+    a[left + j] = b[j];
   }
-  //printf("%s\n","/=====================================/");
-  free(buf);
+  free(b);
 }
 
 /*int convert(int *a, int left, int sep){

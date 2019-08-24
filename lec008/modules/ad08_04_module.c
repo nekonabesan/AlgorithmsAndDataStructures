@@ -37,9 +37,7 @@ void mearge(int *a, int left, int mid, int right){
   }
   for(int j = 0; j < index; j++){
     a[left + j] = b[j];
-    //printf("%d\n", b[j]);
   }
-
   free(b);
 }
 
