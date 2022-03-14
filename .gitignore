@@ -9,3 +9,5 @@ gtest/
 *.ut
 *.ppm
 *.gif
+.vscode
+__pycache__

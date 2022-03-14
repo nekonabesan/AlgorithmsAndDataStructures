@@ -28,4 +28,10 @@ TEST_F(LinnerSearchTest, secondSmallestValue)
   EXPECT_EQ(2, secondSmallestValue(arr1));
 }
 
+TEST_F(LinnerSearchTest, calcDifference)
+{
+  std::vector<int> arr1 = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55};
+  EXPECT_EQ(54, calcDifference(arr1));
+}
+
 // あえて失敗するテストケースも書いておく。

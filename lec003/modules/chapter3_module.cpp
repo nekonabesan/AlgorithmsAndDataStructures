@@ -19,3 +19,20 @@ int secondSmallestValue(std::vector<int> a) {
   }
   return result[1];
 }
+
+int calcDifference(std::vector<int> a) {
+  int max = a[0];
+  int min = a[0];
+  for (unsigned int i = 1; i < a.size(); i++) {
+    if(max < a[i]) {
+      max = a[i];
+    }
+    if(min > a[i]) {
+      min = a[i];
+    }
+  }
+
+  return abs(max - min);
+}
+
+
