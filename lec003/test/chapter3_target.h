@@ -6,5 +6,6 @@
 #include <vector>
 
 int secondSmallestValue(std::vector<int> a);
+int calcDifference(std::vector<int> a);
 
 #endif /* _TARGET_H_ */
