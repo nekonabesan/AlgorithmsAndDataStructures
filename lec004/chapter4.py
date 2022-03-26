@@ -91,4 +91,43 @@ class Solution(object):
     Solution.func4_5(n, 0, 0)
     return Solution.counter
 
+  memo2 = []
+
+  # Code 4.6
+  def func02(self, i, w, a):
+    if (i == 0):
+      if (w == 0):
+        return True
+      else:
+        return False
+
+    # メモをチェック (すでに計算済みならば答えをリターンする)
+    if (Solution.memo2[i - 1][w - 1] != -1):
+      return Solution.memo2[i][w]
+
+    # a[i - 1] を選ばない場合
+    if (Solution.func02(self, i - 1, w, a)):
+      Solution.memo2[i - 1][w - 1] = True
+      return Solution.memo2[i - 1][w - 1]
+
+    # a[i - 1] を選ぶ場合
+    if (Solution.func02(self, i - 1, w - a[i - 1], a)):
+      Solution.memo2[i - 1][w - 1] = True
+      return Solution.memo2[i - 1][w - 1]
+
+    # どちらも false の場合は false
+    Solution.memo2[i - 1][w - 1] = False
+    return Solution.memo2[i - 1][w - 1]
+
+  # Code 4.6
+  def divSum02(self, w, a):
+    result = False
+    Solution.memo2 = [[0 for i in range(w + 1)] for j in range(len(a))]
+    for i in range(len(a)):
+      for j in range(w + 1):
+        Solution.memo2[i][j] = -1
+    if Solution.func02(self, len(a), w, a):
+      result =  True
+    return result
+
 

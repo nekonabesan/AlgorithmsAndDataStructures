@@ -23,13 +23,16 @@ class TestA(unittest.TestCase):  # クラスを派生させて自分用のクラ
     #  self.assertEqual(chapter4.Solution.divSum_4_2(self, 9), 24)
     #  self.assertEqual(chapter4.Solution.divSum_4_2(self, 10), 44)
 
-    def test_5(self):
+    #def test_5(self):
     #  self.assertEqual(chapter4.Solution.sum4_5(self, 0), 0)
     #  self.assertEqual(chapter4.Solution.sum4_5(self, 3), 0)
     #  self.assertEqual(chapter4.Solution.sum4_5(self, 5), 0)
     #  self.assertEqual(chapter4.Solution.sum4_5(self, 7), 0)
     #  self.assertEqual(chapter4.Solution.sum4_5(self, 9), 0)
-      self.assertEqual(chapter4.Solution.sum4_5(self, 753), 6)
+    #  self.assertEqual(chapter4.Solution.sum4_5(self, 753), 6)
+
+    def test_6(self):
+      self.assertEqual(chapter4.Solution.divSum02(self, 14, [3, 2, 6, 5]), True)
 
 if __name__ == '__main__':
     unittest.main()
